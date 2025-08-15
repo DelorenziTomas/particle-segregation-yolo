@@ -20,7 +20,7 @@ El fin es cuantificar de manera precisa y automática la dinámica de segregaci�
 #### Tecnologías Utilizadas
 - **Python**
 - **OpenCV**
-- **YOLO** (la versión que estés utilizando, ej: YOLOv11)
+- **YOLO** (YOLOv11)
 - **Pandas** y **Matplotlib** para el análisis y visualización de datos.
 
 ---
@@ -40,5 +40,5 @@ The objective is to accurately and automatically quantify segregation dynamics b
 #### Technologies Used
 - **Python**
 - **OpenCV**
-- **YOLO** (the version you are using, e.g., YOLOv11)
+- **YOLO** (YOLOv11)
 - **Pandas** & **Matplotlib** for data analysis and visualization.
