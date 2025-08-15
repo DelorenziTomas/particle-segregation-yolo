@@ -1,0 +1,49 @@
+const int motorPWM = 5;
+const int sensorPin = 2;
+
+volatile unsigned long tiempoAnterior = 0;
+volatile unsigned long tiempoVuelta = 0;
+volatile bool nuevaMedicion = false;
+const unsigned long reboteMinimo = 500; // mínimo tiempo entre vueltas válidas (ms)
+
+unsigned int contadorVueltas = 0;
+
+void sensorDetectado() {
+  unsigned long tiempoActual = millis();
+
+  // Filtro anti-rebote: solo registrar si pasó el tiempo mínimo
+  if (tiempoActual - tiempoAnterior > reboteMinimo) {
+    tiempoVuelta = tiempoActual - tiempoAnterior;
+    tiempoAnterior = tiempoActual;
+    nuevaMedicion = true;
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(motorPWM, OUTPUT);
+  pinMode(sensorPin, INPUT_PULLUP);
+  
+  Serial.println("Esperando 30 segundos antes de iniciar el motor...");
+  delay(30000); // Esperar 30 segundos
+
+  attachInterrupt(digitalPinToInterrupt(sensorPin), sensorDetectado, FALLING);
+
+  analogWrite(motorPWM, 180); // Ahora sí: encender motor
+  Serial.println("Iniciando registro de vueltas...");
+  Serial.println("Vuelta;Tiempo(ms)"); // Encabezado para Excel/CSV
+}
+
+void loop() {
+  if (nuevaMedicion) {
+    contadorVueltas++;
+
+    // Salida optimizada para exportar a Excel o CSV
+
+    Serial.println(tiempoVuelta);
+
+    nuevaMedicion = false;
+  }
+
+  // No usar delay largo: el loop está atento a nuevaMedicion
+}

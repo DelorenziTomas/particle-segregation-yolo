@@ -1,0 +1,12 @@
+train: /home/tdelorenzi/testYolo/dataset2/train/images
+val: /home/tdelorenzi/testYolo/dataset2/valid/images
+test: /home/tdelorenzi/testYolo/dataset2/test/images
+nc: 3
+names: ['disco blanco', 'disco verde', 'discos']
+
+roboflow:
+  workspace: particulas-f731d
+  project: discosverdesblancos
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/particulas-f731d/discosverdesblancos/dataset/1

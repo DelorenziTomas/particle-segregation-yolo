@@ -1,0 +1,15 @@
+# gnuplot -persist << EOF
+set datafile separator ","
+set title "SI vs Tiempo (0-10s) - Comparación"
+set xlabel "Tiempo (s)"
+set ylabel "SI"
+set grid
+set xrange [0:]
+
+plot "/home/tdelorenzi/1_yolo/1_segregacion/6_resultados/2025-07-08/08-07-2025-segregation_data.csv" using 2:3 every ::1 with lines title "08-07-2025", \
+     "/home/tdelorenzi/1_yolo/1_segregacion/6_resultados/2025-08-04/04-08-2025-segregation_data.csv" using 2:3 every ::1 with lines title "04-08-2025"
+
+EOF
+
+
+# load "gnuplot.txt"

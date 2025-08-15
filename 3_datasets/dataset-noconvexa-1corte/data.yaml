@@ -1,0 +1,13 @@
+path: /home/tdelorenzi/1_yolo/1_segregacion/3_datasets/dataset-noconvexa-1corte
+train: train/images
+val: valid/images
+
+nc: 1
+names: ['no-convexa1']
+
+roboflow:
+  workspace: segregacion
+  project: medicion-09-07-2025
+  version: 30
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/segregacion/medicion-09-07-2025/dataset/30

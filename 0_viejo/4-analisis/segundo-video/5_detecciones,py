@@ -1,0 +1,122 @@
+import os
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+from ultralytics import YOLO
+
+# 1. Cargar el modelo entrenado
+model_path = 'runs/detect/train9/weights/best.pt'
+model = YOLO(model_path)
+
+# 2. Configuración de clases
+class_names = ['disco blanco', 'estrella blanca']
+
+# 3. Configurar rutas
+video_path = '/home/tdelorenzi/testYolo/1-imagenesvideos/tambor_recortado_36s_rotado2.mp4'
+
+# 4. Configurar video de entrada
+cap = cv2.VideoCapture(video_path)
+if not cap.isOpened():
+    print("Error al abrir el video")
+    exit()
+
+# Inicializar contadores de detecciones
+detecciones_disco = []
+detecciones_estrella = []
+frames_procesados = []
+
+# Configuración del gráfico de matplotlib
+plt.ion()  # Activar modo interactivo
+fig, axs = plt.subplots(2, 1, figsize=(10, 8), gridspec_kw={'height_ratios': [3, 1]})
+ax_principal = axs[0]
+ax_histograma = axs[1]
+
+# Configuración del gráfico principal
+ax_principal.set_title('Detecciones Frame a Frame')
+ax_principal.set_xlabel('Frame')
+ax_principal.set_ylabel('Cantidad de Detecciones')
+line_disco, = ax_principal.plot([], [], label='Disco Blanco', color='green')
+line_estrella, = ax_principal.plot([], [], label='Estrella Blanca', color='red')
+ax_principal.legend()
+ax_principal.grid()
+
+# Configuración del histograma
+ax_histograma.set_title('Histograma de Detecciones Acumuladas')
+ax_histograma.set_xlabel('Cantidad de Detecciones')
+ax_histograma.set_ylabel('Frecuencia')
+
+# Función para actualizar el gráfico
+def actualizar_grafico():
+    # Actualizar líneas de detecciones
+    line_disco.set_data(frames_procesados, detecciones_disco)
+    line_estrella.set_data(frames_procesados, detecciones_estrella)
+    ax_principal.relim()
+    ax_principal.autoscale_view()
+
+    # Limpiar bandas previas para evitar acumulación de color
+    for collection in ax_principal.collections:
+        collection.remove()
+
+    # Calcular desviaciones estándar y agregar bandas
+    if len(detecciones_disco) > 1:
+        std_disco = np.std(detecciones_disco)
+        std_estrella = np.std(detecciones_estrella)
+
+        ax_principal.fill_between(
+            frames_procesados,
+            np.array(detecciones_disco) - std_disco,
+            np.array(detecciones_disco) + std_disco,
+            color='green',
+            alpha=0.2,  # Transparencia tenue
+            label='_nolegend_'
+        )
+        ax_principal.fill_between(
+            frames_procesados,
+            np.array(detecciones_estrella) - std_estrella,
+            np.array(detecciones_estrella) + std_estrella,
+            color='red',
+            alpha=0.2,  # Transparencia tenue
+            label='_nolegend_'
+        )
+
+    # Actualizar histograma
+    ax_histograma.clear()
+    ax_histograma.hist(detecciones_disco, bins=20, alpha=0.5, label='Disco Blanco', color='green')
+    ax_histograma.hist(detecciones_estrella, bins=20, alpha=0.5, label='Estrella Blanca', color='red')
+    ax_histograma.legend()
+    ax_histograma.grid()
+
+    # Dibujar todos los cambios
+    plt.draw()
+    plt.pause(0.01)  # Pausa breve para actualizar la ventana del gráfico
+
+# Procesar video frame a frame
+print("\nProcesando video y mostrando gráfico dinámico... (cierre la ventana del gráfico para finalizar)")
+frame_id = 0
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+    
+    # Realizar predicción
+    results = model.predict(frame, conf=0.346730)
+    
+    # Contar detecciones por clase
+    conteo_actual = [0, 0]  # [disco blanco, estrella blanca]
+    for result in results:
+        for box in result.boxes:
+            class_id = int(box.cls[0])
+            conteo_actual[class_id] += 1
+    
+    # Actualizar listas de detecciones
+    detecciones_disco.append(conteo_actual[0])
+    detecciones_estrella.append(conteo_actual[1])
+    frames_procesados.append(frame_id)
+    
+    # Actualizar gráfico
+    actualizar_grafico()
+    frame_id += 1
+
+# Liberar recursos
+cap.release()
+print("\nProcesamiento completado.")

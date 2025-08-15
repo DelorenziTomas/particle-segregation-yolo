@@ -1,0 +1,13 @@
+path: /home/tdelorenzi/1_yolo/1_segregacion/3_datasets/dataset_discospmma2
+train: train/images
+val: valid/images
+
+nc: 1
+names: ['pmmma-blanca']
+
+roboflow:
+  workspace: segregacion
+  project: pmma-vs-pmma-n4nos
+  version: 10
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/segregacion/pmma-vs-pmma-n4nos/dataset/10

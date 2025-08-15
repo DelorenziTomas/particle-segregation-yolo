@@ -1,0 +1,6 @@
+Este archivo de texto esta como idea de ir ordenando la data de cada grabacion
+
+
+/home/tdelorenzi/1_yolo/1_segregacion/1_imagenesvideos/0_crudos/20250708_130325.mp4 -> este video fue grabado el 8 de julio de 2025 a las 13:03:25 con un pwm = 180
+/home/tdelorenzi/1_yolo/1_segregacion/1_imagenesvideos/0_crudos/20250804_103822.mp4 -> este video fue grabado el 4 de agosto de 2025 a las 10:38:22 con un pwm = 70 (rotacion menor a 180)
+

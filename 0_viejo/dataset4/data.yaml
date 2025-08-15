@@ -1,0 +1,13 @@
+train: /home/tdelorenzi/testYolo/dataset4/train/images
+val: /home/tdelorenzi/testYolo/dataset4/valid/images
+test: /home/tdelorenzi/testYolo/dataset4/test/images
+
+nc: 2
+names: ['disco blanco', 'estrella blanca']
+
+roboflow:
+  workspace: particulas-f731d
+  project: 25-05-2025
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/particulas-f731d/25-05-2025/dataset/2

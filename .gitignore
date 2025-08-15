@@ -1,0 +1,14 @@
+# Entorno virtual (está afuera, pero es buena práctica)
+../env1/
+venv/
+__pycache__/
+
+# Archivos de datos y video
+*.mp4
+*.avi
+*.mov
+*.csv
+*.dat
+*.pt
+# Resultados de YOLO (están afuera, pero por si acaso)
+../runs/

@@ -1,0 +1,15 @@
+# data.yaml
+train: /home/tdelorenzi/testYolo/dataset/train/images
+val: /home/tdelorenzi/testYolo/dataset/valid/images
+test: /home/tdelorenzi/testYolo/dataset/test/images
+
+nc: 1  # Número de clases
+names: ['estrellas']  # Nombres de las clases
+
+# Configuración de Roboflow (opcional)
+roboflow:
+  workspace: particulas-f731d
+  project: my-first-project-mxqbu
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/particulas-f731d/my-first-project-mxqbu/dataset/1
