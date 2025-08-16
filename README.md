@@ -10,7 +10,7 @@
 Este proyecto es parte de una investigación académica que utiliza Computer Vision, específicamente el modelo YOLO de Ultralytics, para analizar la segregación de partículas granulares convexas y no convexas dentro de un tambor rotante.
 
 #### Demostración
-![Demostración del análisis de segregación de partículas](demo/demo_segregacion.gif)
+![Demostración del análisis de segregación de partículas](demo/demo_segregacion_optimizado.gif)
 
 #### Objetivo Científico
 El fin es cuantificar de manera precisa y automática la dinámica de segregación, extrayendo datos de trayectorias y distribución espacial de las partículas a partir de grabaciones del experimento.
@@ -33,7 +33,7 @@ El fin es cuantificar de manera precisa y automática la dinámica de segregaci�
 This project is part of an academic research initiative that uses Computer Vision, specifically the YOLO model from Ultralytics, to analyze the segregation of convex and non-convex granular particles inside a rotating drum.
 
 #### Demonstration
-![Particle segregation analysis demonstration](demo/demo_segregacion.gif)
+![Particle segregation analysis demonstration](demo/demo_segregacion_optimizado.gif)
 
 #### Scientific Goal
 The objective is to accurately and automatically quantify segregation dynamics by extracting data on trajectories and spatial distribution from experimental video recordings.
